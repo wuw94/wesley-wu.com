@@ -1,0 +1,132 @@
+*
+{
+	font-family: 'Nunito', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* tooltips! */
+
+/*													NAVIGATION															*/
+
+/*														NAVIGATION - The bar itself										*/
+.navbar
+{
+	background-color: #333;
+	overflow: hidden;
+}
+
+.navbar_title
+{
+	float: left;
+	display: none;
+	color: #f2f2f2;
+	background-color: #333;
+	margin: 4px 4px;
+	text-align: center;
+	padding: 4px 20px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+/*														NAVIGATION - Links in the bar (Default)							*/
+.navbar a
+{
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	background-color: #333;
+	margin: 4px 4px;
+	text-align: center;
+	padding: 4px 20px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+/*														NAVIGATION - Links in the bar (Current Page)					*/
+.navbar #navbar_current a
+{
+	background-color: #70A9FE;
+}
+
+/*														NAVIGATION - Links in the bar (Currently Hovered)				*/
+.navbar a:hover
+{
+	background-color: #ddd;
+	color: black;
+}
+
+/*														NAVIGATION - Hamburger Button									*/
+.navbar .icon {
+	display: none; /* We hide this when the screen is greater than 600px */
+}
+
+/*														NAVIGATION - Behavior when screen smaller (Untoggled)			*/
+@media screen and (max-width: 600px) {
+	.navbar_title
+	{
+		position: relative;
+		display: block;
+	}
+	.navbar a /* Don't display navigation elements */
+	{
+		display: none;
+	}
+
+	.navbar a.icon /* Display hamburger button on the right */
+	{
+		float: right;
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+/*														NAVIGATION - Behavior when screen smaller (Toggled)				*/
+@media screen and (max-width: 600px) {
+	.navbar_title
+	{
+		float: none;
+		display: block;
+		text-align: left;
+		position: relative;
+	}
+
+	.navbar.toggled_on
+	{
+		position: relative;
+	}
+
+	.navbar.toggled_on a
+	{
+		float: none;
+		display: block;
+		text-align: left;
+	}
+}
+
+
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+h3 {}
+h4 {}
+
+p {
+	font-size: 18px;
+	line-height: normal;
+	text-align: center;
+}
+
+a {
+	color: RoyalBlue;
+	text-decoration: none;
+}
