@@ -1,5 +1,5 @@
 /*
-style.css
+mobile-style.css
 
 -auth Wesley Wu
 
@@ -21,45 +21,25 @@ Styling for the following elements will be in this order:
 	font-family: 'Nunito', sans-serif;
 }
 
-
-
-/* tooltips! */
 body, html
 {
 	background-color: rgb(255,180,94);
 	height: 100%;
 }
 
-
 .signature
 {
-	float: none;
-	height: 100px;
-	margin: 0;
-	color: white;
-	
-	text-align: center;
+	display: none;
 }
 
-/*------------------------------------------------- NAVIGATION --------------------------------------------------------*/
-/*----------------------------------------------------- Bar -----------------------------------------------------------*/
+/*													NAVIGATION															*/
+/*----------------------------------------------------- Bar ------------------------------------------------------------*/
 .navbar
-{
-	width: auto;
-	height: 50px;
-	
-	background-color: rgb(255,180,94);
-
-	text-align: center;
-
-	overflow: hidden;
-}
-
-.navbar.past-main
 {
 	position: fixed;
 	left: 0;
 	top: 0;
+	
 	height: 50px;
 	width: 100%;
 
@@ -70,18 +50,13 @@ body, html
 	z-index: 1000;
 }
 
-.navbar.past-main.toggled-on
+.navbar.toggled-on
 {
 	height: 174px;
 }
 
 /*----------------------------------------------------- Bar Title ------------------------------------------------------*/
 .navbar-title
-{
-	display: none;
-}
-
-.navbar-title.past-main
 {
 	position: relative;
 	float: none;
@@ -101,17 +76,12 @@ body, html
 	text-transform: uppercase;
 }
 
-.navbar-title.past-main.toggled-on
+.navbar-title.toggled-on
 {
 }
 
 /*----------------------------------------------------- Hamburger Button -----------------------------------------------*/
-.navbar .icon
-{
-	display: none;
-}
-
-.navbar.past-main a.icon
+.navbar a.icon, .navbar.past-main a.icon
 {
 	position: absolute;
 	float: left;
@@ -128,104 +98,29 @@ body, html
 	color: rgb(240,240,240);
 	background-color: rgb(70,70,70);
 	border-radius: 0%;
+	
 }
 
-.navbar.past-main.toggled-on a.icon
+.navbar.toggled-on a.icon
 {
 }
 
 /*----------------------------------------------------- Navigation Links -----------------------------------------------*/
-.navbar li
-{
-	display: inline-block;
-
-    width: 130px;
-    height: 130px;
-    margin: 2px 2px 2px 2px;
-	padding: 0px 0px 0px 0px;
-	
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
-	border-radius: 5%;
-
-	font-size: 20px;
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-
-	transition: background-color 0.1s,
-				padding 0.1s,
-				margin 0.1s;
-}
-
 .navbar a
 {
-	display: inline-block;
-
-	width: 130px;
-	height: 130px;
-	margin: 0px 0px 0px 0px;
-	padding: 12px 0px 0px 0px;
-	
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
-	border-radius: 4%;
-
-	font-size: 20px;
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-
-	transition: background-color 0.1s,
-				padding 0.1s,
-				margin 0.1s;
-}
-
-.navbar a:hover
-{
-	background-color: rgb(140,140,140);
-}
-
-.navbar.past-main li
-{
 	display: none;
-}
-
-.navbar.past-main a
-{
-}
-
-.navbar.past-main.toggled-on li
-{
-	float: none;
-	display: block;
-
-	width: auto;
-	height: 35px;
-	margin: 6px;
-	padding: 0;
-
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
-	border-radius: 0%;
 
 	font-size: 20px;
-	text-align: left;
-	text-decoration: none;
-	text-transform: uppercase;
+
+	transition: background-color 0.1s;
 }
 
-.navbar.past-main.toggled-on :not(.icon) a
+.navbar.toggled-on a
 {
 	float: none;
 	display: block;
-	left: 0;
 
-
-	width: auto;
-	height: 35px;
-
-	margin: 0px;
+	margin: 6px;
 	padding: 4px 10px;
 
 	color: rgb(240,240,240);
@@ -238,14 +133,17 @@ body, html
 	text-transform: uppercase;
 }
 
-.navbar.past-main.toggled-on a:hover
+.navbar a:hover
 {
 	background-color: rgb(140,140,140);
 }
 
-/*----------------------------------------------------- Navigation Current Page ----------------------------------------*/
+.navbar.toggled-on a:hover
+{
+}
 
-.navbar #navbar-current a
+/*----------------------------------------------------- Navigation Current Page ----------------------------------------*/
+.navbar.toggled-on #navbar-current a
 {
 	color: rgb(0,0,0);
 	background-color: rgb(255,255,255);
@@ -257,57 +155,28 @@ body, html
 	position: relative;
 
 	width: 90%;
-	min-height: 80%;
-	overflow: auto;
+	height: 100%;
 
 	margin: 0px 5% 5% 5%;
-	padding: 20px 20px;
+	padding: 1px 0px;
 	
 	background-color: rgb(255,255,255);
 	border-radius: 0.5%;
 }
 
-.information.past-main
-{
-	position: relative;
-}
 /*----------------------------------------------------- Title & Content ------------------------------------------------*/
 #title
 {
-	position: relative;
-	margin: 20px 20px;
-	padding: 1px;
-
-	text-align: left;
-}
-
-#title.past-main
-{
 	display: none;
-
 }
 
 .content
 {
-	position: relative;
-
-	width: 100%;
-	height: auto;
-	overflow: auto;
-	margin: 20px 0px 0px 0px;
-	padding: 0px 20px;
+	margin: 0;
+	padding: 80px 20px 20px 20px;
 
 	background-color: rgb(255,255,255);
 }
-
-.content.past-main
-{
-	position: relative;
-	width: 100%;
-	margin: 150px 0px 0px 0px;
-	padding: 1px 20px;
-}
-
 
 
 h1
@@ -327,8 +196,6 @@ h2
 
 h3
 {
-	font-size: 36px;
-	font-family: 'Nunito', sans-serif;
 }
 
 h4
@@ -353,4 +220,3 @@ a {
 	color: RoyalBlue;
 	text-decoration: none;
 }
-

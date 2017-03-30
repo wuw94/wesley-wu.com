@@ -2,43 +2,61 @@
 <html>
 <head>
 	<title>Wesley Wu</title>
-	<link href='https://fonts.googleapis.com/css?family=Nunito:400' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" media="only screen and (min-width: 768px)" href="style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width: 768px)" href="mobile-style.css">
+	<script src="jquery-3.2.0.min.js"></script>
 	<script src="navigation.js"></script>
+	<script src="onscroll.js"></script>
 </head>
 
 <body>
 
-	<div class="navbar" id="navbar_id"> <!--				NAVIGATION													-->
-		<div class="navbar_title">I am...</div>
-		<div id="navbar_current"><a href="">I am...</a></div>
-		<a href="projects.html">Projects</a>
-		<a href="topics.html">Topics</a>
+	<div class="signature">
+		<a href=""><img src="Wasoon Logo Small.png"></a>
+	</div>
+	<!--															NAVIGATION													-->
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title">I am...</div>
+
+		<li><div id="navbar-current"><a href="">I am...</a></div></li>
+		<li><a href="projects.html">Projects</a></li>
+		<li><a href="topics.html">Topics</a></li>
 		<a href="javascript:void(0);" class="icon" onclick="HamburgerButtonToggle()">&#9776;</a> <!-- Hamburger Button -->
-	</div>
+	</ul>
 
 
 
 
 
-
-	<div class="banner"> <!--										BANNER														-->
-		<div id="banner-content">
-			<h1>Hello World!</h1>
+	<!--															INFORMATION														-->
+	<div class="information">
+		<div id="title">
+			<h1>I am...</h1>
 		</div>
+
+		<!--														CONTENT OF THE PAGE												-->
+		<div class="content">
+			<p>
+				<center>
+					<img src="Wasoon Logo.png"/>
+					<br>
+					<h6>Wesley Wu</h6>
+					<br>
+					<br>
+					<hr width="200px">
+					<br>
+					Computer Science and Engineering</br>
+					Programmer • Game Developer • Researcher • Musician</br>
+					Making awesome since 2012.</br>
+				</center>
+			</p>
+		</div>
+		
 	</div>
 
-	<!--															CONTENT OF THE PAGE											-->
-	<div class="content">
-		<h2>I am...</h2>
-		<p>
-			<b>Wesley Wu</b></br>
-			Computer Science and Engineering</br>
-			Programmer, Game Developer, Research, Musician</br>
-			Making awesome since 2012.</br>
-		</p>
-	</div>
-
+	
+	
 
 
 
