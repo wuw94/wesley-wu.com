@@ -97,7 +97,7 @@ Styling for the following elements will be in this order:
 }
 
 /*														NAVIGATION - Behavior when screen smaller (Untoggled)			*/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px), (orientation: portrait) {
 	.navbar
 	{
 		height: 50px;
@@ -131,7 +131,7 @@ Styling for the following elements will be in this order:
 }
 
 /*														NAVIGATION - Behavior when screen smaller (Toggled)				*/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px), (orientation: portrait) {
 	.navbar_title
 	{
 		position: relative;
