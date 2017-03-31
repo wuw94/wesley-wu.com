@@ -41,20 +41,21 @@ body, html
 	left: 0;
 	top: 0;
 	
-	height: 50px;
 	width: 100%;
+	height: 10%;
 
 	background-color: rgb(255,180,94);
 
 	overflow: hidden;
-	transition: height 0.1s;
+	transition: height 0.2s, background-color 0.2s;
 	z-index: 1000;
 	box-shadow: 0px 0px 5px black;
 }
 
 .navbar.toggled-on
 {
-	height: auto;
+	background-color: rgb(240,240,240);
+	height: 100%;
 }
 
 /*----------------------------------------------------- Bar Title ------------------------------------------------------*/
@@ -64,26 +65,26 @@ body, html
 	display: inline-block;
 
 	width: 100%;
-	height: 50px;
+	height: 100%;
 
 	margin: 0;
-	padding: 8px;
+	padding: 2.5%;
 	
 	color: rgb(70,70,70);
-	background-color: rgb(255,180,94);
 	
-	font-size: 28px;
+	font-size: 5vh;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
-.navbar-title.toggled-on
+.navbar.toggled-on .navbar-title
 {
+	height: auto;
 }
 
 /*----------------------------------------------------- Hamburger Button -----------------------------------------------*/
-.navbar .hamburger-icon, .navbar.past-main .hamburger-icon
+.navbar .hamburger-icon
 {
 	position: absolute;
 	float: left;
@@ -91,17 +92,18 @@ body, html
 	left: 0;
 	top: 0;
 
-	width: 40px;
-	height: auto;
+	width: 8vh;
+	height: 8vh;
 
-	margin: 6px;
-	padding: 4px 10px;
+	margin: 1vh;
+	padding: 0.5vh 0;
 
 	color: rgb(240,240,240);
 	background-color: rgb(70,70,70);
 	border-radius: 0%;
 
-	font-size: 20px;
+	font-size: 5vh;
+	text-align: center;
 }
 
 .navbar.toggled-on .hamburger-icon
@@ -131,7 +133,7 @@ body, html
 	display: block;
 
 	width: auto;
-	height: auto;
+	height: 8vh;
 	margin: 6px;
 	padding: 0;
 }
@@ -139,20 +141,23 @@ body, html
 .navbar.toggled-on :not(.hamburger-icon) a
 {
 	display: inline-block;
+	float: none;
 
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	padding: 10px 12px;
+	padding: 1.5vh;
 
 	color: rgb(240,240,240);
 	background-color: rgb(70,70,70);
 	border-radius: 0%;
 
-	font-size: 20px;
+	font-size: 4vh;
 	text-align: left;
 	text-decoration: none;
 	text-transform: uppercase;
+
+	overflow: hidden;
 }
 
 .navbar.toggled-on a:hover
@@ -161,16 +166,21 @@ body, html
 }
 
 /*----------------------------------------------------- Navigation Current Page ----------------------------------------*/
+#navbar-current
+{
+	height: 100%;
+}
+
 .navbar.toggled-on #navbar-current a
 {
-	color: rgb(0,0,0);
-	background-color: rgb(255,255,255);
+	color: rgb(255,255,255);
+	background-color: rgb(150,150,150);
 }
 
 .navbar.toggled-on #navbar-current a:hover
 {
-	color: rgb(120,120,120);
-	background-color: rgb(255,255,255);
+	color: rgb(255,255,255);
+	background-color: rgb(180,180,180);
 }
 
 /*----------------------------------------------------- Information ----------------------------------------------------*/
@@ -199,7 +209,7 @@ body, html
 .content
 {
 	margin: 0;
-	padding: 60px 0px 20px 0px;
+	padding: 10vh 0px 20px 0px;
 
 	background-color: rgb(255,255,255);
 
