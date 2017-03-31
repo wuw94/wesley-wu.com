@@ -9,7 +9,7 @@ $(document).ready(function()
 
 	    if (HasClass(x, "toggled-on"))
 	    {
-	        x.className = x.className.substr(0, x.className.length - 11);
+	        //x.className = x.className.substr(0, x.className.length - 11);
 	    }
 		scroll_start = $(this).scrollTop();
 		if(scroll_start > offset.top)

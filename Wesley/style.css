@@ -17,7 +17,7 @@ Styling for the following elements will be in this order:
 	margin: 0;
 	padding: 0;
 	
-	font-size: 20px;
+	font-size: 22px;
 	font-family: 'Nunito', sans-serif;
 }
 
@@ -30,13 +30,13 @@ body, html
 	height: 100%;
 }
 
-
+/*------------------------------------------------- SIGNATURE ---------------------------------------------------------*/
 .signature
 {
 	float: none;
+
 	height: 100px;
 	margin: 0;
-	color: white;
 	
 	text-align: center;
 }
@@ -45,7 +45,7 @@ body, html
 /*----------------------------------------------------- Bar -----------------------------------------------------------*/
 .navbar
 {
-	width: auto;
+	width: 100%;
 	height: 50px;
 	
 	background-color: rgb(255,180,94);
@@ -53,6 +53,8 @@ body, html
 	text-align: center;
 
 	overflow: hidden;
+	transition: height 0.1s;
+	z-index: 1000;
 }
 
 .navbar.past-main
@@ -60,19 +62,17 @@ body, html
 	position: fixed;
 	left: 0;
 	top: 0;
+	
 	height: 50px;
-	width: 100%;
 
 	background-color: rgb(255,180,94);
-
-	overflow: hidden;
-	transition: height 0.1s;
-	z-index: 1000;
+	
+	box-shadow: 0px 0px 5px black;
 }
 
 .navbar.past-main.toggled-on
 {
-	height: 174px;
+	height: auto;
 }
 
 /*----------------------------------------------------- Bar Title ------------------------------------------------------*/
@@ -84,19 +84,19 @@ body, html
 .navbar-title.past-main
 {
 	position: relative;
-	float: none;
-	display: block;
-	left: 40px;
-	top: 0;
+	display: inline-block;
 
-	margin: 8px 4px;
-	padding: 4px 0px 4px 20px;
+	width: 100%;
+	height: 50px;
+
+	margin: 0;
+	padding: 8px;
 	
 	color: rgb(70,70,70);
 	background-color: rgb(255,180,94);
 	
-	font-size: 20px;
-	text-align: left;
+	font-size: 28px;
+	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 }
@@ -106,12 +106,12 @@ body, html
 }
 
 /*----------------------------------------------------- Hamburger Button -----------------------------------------------*/
-.navbar .icon
+.navbar .hamburger-icon
 {
 	display: none;
 }
 
-.navbar.past-main a.icon
+.navbar.past-main .hamburger-icon
 {
 	position: absolute;
 	float: left;
@@ -128,9 +128,11 @@ body, html
 	color: rgb(240,240,240);
 	background-color: rgb(70,70,70);
 	border-radius: 0%;
+
+	font-size: 20px;
 }
 
-.navbar.past-main.toggled-on a.icon
+.navbar.past-main.toggled-on .hamburger-icon
 {
 }
 
@@ -141,8 +143,18 @@ body, html
 
     width: 130px;
     height: 130px;
-    margin: 2px 2px 2px 2px;
-	padding: 0px 0px 0px 0px;
+    margin: 2px;
+	padding: 0;
+}
+
+.navbar a
+{
+	display: inline-block;
+
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 12px 0px;
 	
 	color: rgb(240,240,240);
 	background-color: rgb(70,70,70);
@@ -153,37 +165,13 @@ body, html
 	text-decoration: none;
 	text-transform: uppercase;
 
-	transition: background-color 0.1s,
-				padding 0.1s,
-				margin 0.1s;
-}
-
-.navbar a
-{
-	display: inline-block;
-
-	width: 130px;
-	height: 130px;
-	margin: 0px 0px 0px 0px;
-	padding: 12px 0px 0px 0px;
+	transition: background-color 0.1s;
 	
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
-	border-radius: 4%;
-
-	font-size: 20px;
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-
-	transition: background-color 0.1s,
-				padding 0.1s,
-				margin 0.1s;
 }
 
 .navbar a:hover
 {
-	background-color: rgb(140,140,140);
+	background-color: rgb(100,100,100);
 }
 
 .navbar.past-main li
@@ -195,38 +183,31 @@ body, html
 {
 }
 
-.navbar.past-main.toggled-on li
+.navbar.past-main a:hover
 {
-	float: none;
-	display: block;
-
-	width: auto;
-	height: 35px;
-	margin: 6px;
-	padding: 0;
-
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
-	border-radius: 0%;
-
-	font-size: 20px;
-	text-align: left;
-	text-decoration: none;
-	text-transform: uppercase;
+	background-color: rgb(100,100,100);
 }
 
-.navbar.past-main.toggled-on :not(.icon) a
+.navbar.past-main.toggled-on li
 {
+	position: relative;
 	float: none;
 	display: block;
-	left: 0;
-
 
 	width: auto;
-	height: 35px;
+	height: auto;
+	margin: 6px;
+	padding: 0;
+}
 
-	margin: 0px;
-	padding: 4px 10px;
+.navbar.past-main.toggled-on :not(.hamburger-icon) a
+{
+	display: inline-block;
+
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 10px 12px;
 
 	color: rgb(240,240,240);
 	background-color: rgb(70,70,70);
@@ -240,7 +221,7 @@ body, html
 
 .navbar.past-main.toggled-on a:hover
 {
-	background-color: rgb(140,140,140);
+	background-color: rgb(100,100,100);
 }
 
 /*----------------------------------------------------- Navigation Current Page ----------------------------------------*/
@@ -251,20 +232,37 @@ body, html
 	background-color: rgb(255,255,255);
 }
 
+.navbar #navbar-current a:hover
+{
+}
+
+.navbar.past-main #navbar-current a
+{
+	color: rgb(0,0,0);
+	background-color: rgb(255,255,255);
+}
+
+.navbar.past-main #navbar-current a:hover
+{
+	color: rgb(120,120,120);
+	background-color: rgb(255,255,255);
+}
+
 /*----------------------------------------------------- Information ----------------------------------------------------*/
 .information
 {
 	position: relative;
 
 	width: 90%;
-	min-height: 80%;
-	overflow: auto;
+	min-height: 0%;
 
 	margin: 0px 5% 5% 5%;
-	padding: 20px 20px;
+	padding: 20px 60px;
 	
 	background-color: rgb(255,255,255);
 	border-radius: 0.5%;
+
+	overflow: auto;
 }
 
 .information.past-main
@@ -275,8 +273,8 @@ body, html
 #title
 {
 	position: relative;
-	margin: 20px 20px;
-	padding: 1px;
+	margin: 20px 0px;
+	padding: 0px;
 
 	text-align: left;
 }
@@ -284,7 +282,6 @@ body, html
 #title.past-main
 {
 	display: none;
-
 }
 
 .content
@@ -293,11 +290,16 @@ body, html
 
 	width: 100%;
 	height: auto;
-	overflow: auto;
 	margin: 20px 0px 0px 0px;
-	padding: 0px 20px;
+	padding: 0px 0px 100px 0px;
 
 	background-color: rgb(255,255,255);
+
+	font-size: 22px;
+	line-height: normal;
+	text-align: left;
+
+	overflow: auto;
 }
 
 .content.past-main
@@ -305,7 +307,7 @@ body, html
 	position: relative;
 	width: 100%;
 	margin: 150px 0px 0px 0px;
-	padding: 1px 20px;
+	padding: 0px 0px;
 }
 
 
@@ -321,6 +323,8 @@ h1
 
 h2
 {
+	font-size: 24px;
+	font-family: 'Oswald', sans-serif;
 }
 
 
@@ -341,12 +345,6 @@ h6
 	text-align: left;
 	font-size: 44px;
 	font-family: 'Permanent Marker';
-}
-
-p {
-	font-size: 20px;
-	line-height: normal;
-	text-align: left;
 }
 
 a {
