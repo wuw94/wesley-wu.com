@@ -11,6 +11,33 @@ Styling for the following elements will be in this order:
 	Misc Properties (cursor, overflow, z-index)
 */
 
+:root
+{
+	--bg-black: rgb(0,0,0);
+	--bg-black-light: rgb(40,40,40);
+
+	--bg-gray-dark: rgb(70,70,70);
+	--bg-gray: rgb(110,110,110);
+	--bg-gray-light: rgb(140,140,140);
+
+	--bg-white-dark: rgb(240,240,240);
+	--bg-white: rgb(255,255,255);
+
+	--bg-orange: rgb(255,211,144);
+
+	--txt-black: rgb(0,0,0);
+	--txt-black-light: rgb(60,60,60);
+
+	--txt-gray-dark: rgb(70,70,70);
+	--txt-gray: rgb(80,80,80);
+	--txt-gray-light: rgb(100,100,100);
+
+	--txt-white-dark: rgb(240,240,240);
+	--txt-white: rgb(255,255,255);
+
+	--txt-orange: rgb(208,123,13);
+}
+
 *
 {
 	box-sizing: border-box;
@@ -20,7 +47,16 @@ Styling for the following elements will be in this order:
 
 html
 {
-	background-color: rgb(255,180,94);
+	color: var(--txt-black-light);
+	background-color: var(--bg-orange);
+}
+
+@media only screen and (max-width: 600px)
+{
+	html
+	{
+		font-size: 4vw;
+	}
 }
 
 @media only screen and (min-width: 600px)
@@ -31,13 +67,12 @@ html
 	}
 }
 
-@media only screen and (max-width: 600px)
+::-webkit-scrollbar
 {
-	html
-	{
-		font-size: 4vmin;
-	}
+  width: 0px;
+  height: 0px;
 }
+
 
 /*------------------------------------------------- SIGNATURE ---------------------------------------------------------*/
 .signature
@@ -56,7 +91,7 @@ html
 	width: 100%;
 	height: 10%;
 
-	background-color: rgb(255,180,94);
+	background-color: var(--bg-orange);
 
 	overflow: hidden;
 	transition: height 0.2s, background-color 0.2s;
@@ -66,7 +101,7 @@ html
 
 .navbar.toggled-on
 {
-	background-color: rgb(240,240,240);
+	background-color: var(--bg-white-dark);
 	height: 100%;
 }
 
@@ -82,7 +117,7 @@ html
 	margin: 0;
 	padding: 2.5%;
 	
-	color: rgb(70,70,70);
+	color: var(--txt-black-light);
 	
 	font-size: 5vh;
 	font-family: 'Nunito';
@@ -111,8 +146,8 @@ html
 	margin: 1vh;
 	padding: 0.5vh 0;
 
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
+	color: var(--txt-white-dark);
+	background-color: var(--bg-gray-dark);
 	border-radius: 0%;
 
 	font-size: 5vh;
@@ -138,7 +173,7 @@ html
 
 .navbar a:hover
 {
-	background-color: rgb(100,100,100);
+	background-color: var(--bg-gray);
 }
 
 .navbar.toggled-on li
@@ -164,8 +199,8 @@ html
 	margin: 0;
 	padding: 1.5vh;
 
-	color: rgb(240,240,240);
-	background-color: rgb(70,70,70);
+	color: var(--txt-white-dark);
+	background-color: var(--bg-gray-dark);
 	border-radius: 0%;
 
 	font-size: 4vh;
@@ -179,7 +214,7 @@ html
 
 .navbar.toggled-on a:hover
 {
-	background-color: rgb(100,100,100);
+	background-color: var(--bg-gray);
 }
 
 /*----------------------------------------------------- Navigation Current Page ----------------------------------------*/
@@ -190,14 +225,12 @@ html
 
 .navbar.toggled-on #navbar-current a
 {
-	color: rgb(255,255,255);
-	background-color: rgb(150,150,150);
+	color: var(--txt-white);
+	background-color: var(--bg-gray-light);
 }
 
 .navbar.toggled-on #navbar-current a:hover
 {
-	color: rgb(255,255,255);
-	background-color: rgb(180,180,180);
 }
 
 /*----------------------------------------------------- Information ----------------------------------------------------*/
@@ -211,7 +244,7 @@ html
 	margin: 12vh 2vw 2vh 2vw;
 	padding: 2vh 2vw;
 	
-	background-color: rgb(255,255,255);
+	background-color: var(--bg-white);
 	border-radius: 1vh;
 }
 
@@ -221,19 +254,10 @@ html
 	display: none;
 }
 
-.content
-{
-	margin: 0;
-	padding: 0;
-
-	background-color: rgb(255,255,255);
-}
-
 .content p
 {
 	font-size: 1em;
 	font-family: 'Nunito';
-	line-height: normal;
 }
 
 /* h1 is page title, omitted because mobile page title will show on navigation */
@@ -271,9 +295,6 @@ html
 
 	margin-bottom: 1vh;
 
-	border-bottom: solid;
-	border-width: 1px;
-
 	font-size: 3em;
 	font-family: 'Permanent Marker';
 	text-align: center;
@@ -281,7 +302,7 @@ html
 
 .content a
 {
-	color: rgb(255,180,94);
+	color: var(--txt-orange);
 	text-decoration: none;
 }
 
@@ -289,5 +310,7 @@ html
 {
 	display: block;
 	
+    max-width: 80%;
+	max-height: 80%;
 	margin: auto;
 }
