@@ -27,7 +27,6 @@ Styling for the following elements will be in this order:
 body, html
 {
 	background-color: rgb(255,180,94);
-	height: 100%;
 }
 
 /*------------------------------------------------- SIGNATURE ---------------------------------------------------------*/
@@ -260,7 +259,7 @@ body, html
 	padding: 20px 60px;
 	
 	background-color: rgb(255,255,255);
-	border-radius: 0.5%;
+	border-radius: 5px;
 
 	overflow: auto;
 }
