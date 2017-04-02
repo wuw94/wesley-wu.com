@@ -37,7 +37,7 @@
 		<div class="content">
 			<h2>Why I Used .ogg</h2>
 			<h4>The problem</h4>
-			<p>As soon as I jumped into this project, I noticed that there was a problem with looping sounds. Even if I edited the sound file so the cutoff is at a perfect timing on a computer, there was a noticeable delay when we built the project and ran it on a mobile device. I did a little research. Turns out that phones have to load up the sound file every time before playing, even if that sound was just played. So I started thinking about the basic ways to solve this issue:</p>
+			<p>As soon as I jumped into this project, I noticed that there was a problem with looping sounds. Even if I edited the sound file so the cutoff is at a perfect timing on a computer, there was a noticeable delay when we built the project and ran it on a mobile device. I did a little research. Turns out that phones have to <b>load up the sound file every time before playing</b>, even if that sound was just played. So I started thinking about the basic ways to solve this issue:</p>
 
 			<ul>
 				<li>Always have the next song preloaded so that it's available right when the current song ends.</li>
@@ -53,13 +53,13 @@
 			<br>
 
 			<h4>Breaking song into separate parts</h4>
-			<p>This was highly impractical because we would have so many sound files. Like upwards to a hundred or so. But I tried it anyway, and the result was still pretty bad. No matter what I did, there would always be a lingering delay in which the phone has to load the next song.</p>
+			<p>This was highly impractical because we would have so many sound files. Like upwards to a hundred or so. But I tried it anyway, and the result was still &ndash;&ndash; unsurprisingly &ndash;&ndash; pretty bad. No matter what I did, there would always be a lingering delay in which the phone has to load the next song.</p>
 
 			<br>
 
 			<h4>Then I stumbled upon .ogg</h4>
 
-			<p>It turns out that .ogg loads a lot faster than the file types we were originally using (.wav and .mp3). There was still maybe a 0.1s delay, but it was a lot less noticeable than the delay we had before, which was approximately 0.5s</p>
+			<p>It turns out that .ogg loads a lot faster than the file types we were originally using (.wav and .mp3). There was still maybe a 0.1s delay, but it was a lot less noticeable than the delay we had before, which was approximately 0.5s. It seemed to solve the problem for our case, but I'm not too sure what would happen with much different file sizes.</p>
 
 		</div>
 

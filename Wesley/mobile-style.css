@@ -387,26 +387,59 @@ html
 	border-bottom: 1px dotted black;
 }
 
-.content .tooltip .tooltiptext /* Tooltip box, not hovered */
+@media only screen and (max-width: 600px)
 {
-	visibility: hidden;
-	position: absolute;
-	bottom: 150%;
-	left: 50%;
-	transform: translate(-50%, 0%);
+	.content .tooltip .tooltiptext /* Tooltip box, not hovered */
+	{
+		visibility: hidden;
+		position: absolute;
+		bottom: 150%;
+		left: 50%;
+		transform: translate(-50%, 0%);
 
-	padding: 5%;
+		width: 40vw;
+		padding: 5%;
 
-	color: var(--txt-white);
-	background-color: var(--bg-black-light);
-	border-radius: 4px;
+		color: var(--txt-white);
+		background-color: var(--bg-black-light);
+		border-radius: 4px;
 
-	text-align: center;
+		font-size: 0.8em;
+		text-align: center;
 
-	z-index: 1;
-	opacity: 0;
-	transition: bottom 0s, opacity 0s;
+		z-index: 1;
+		opacity: 0;
+		transition: bottom 0s, opacity 0s;
+	}
 }
+
+@media only screen and (min-width: 600px)
+{
+	.content .tooltip .tooltiptext /* Tooltip box, not hovered */
+	{
+		visibility: hidden;
+		position: absolute;
+		bottom: 150%;
+		left: 50%;
+		transform: translate(-50%, 0%);
+
+		width: 250px;
+		padding: 5%;
+
+		color: var(--txt-white);
+		background-color: var(--bg-black-light);
+		border-radius: 4px;
+
+		font-size: 0.8em;
+		text-align: center;
+
+		z-index: 1;
+		opacity: 0;
+		transition: bottom 0s, opacity 0s;
+	}
+}
+
+
 
 .content .tooltip .tooltiptext::after /* Tooltip arrow */
 {
