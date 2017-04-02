@@ -24,7 +24,7 @@ Styling for the following elements will be in this order:
 	--bg-white-dark: rgb(240,240,240);
 	--bg-white: rgb(255,255,255);
 
-	--bg-orange: rgb(255,211,144);
+	--bg-orange: rgb(255,207,132);
 
 	--txt-black: rgb(0,0,0);
 	--txt-black-light: rgb(60,60,60);
@@ -52,15 +52,15 @@ html
 	background-color: var(--bg-orange);
 }
 
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 800px)
 {
 	html
 	{
-		font-size: 4vw;
+		font-size: 3vw;
 	}
 }
 
-@media only screen and (min-width: 600px)
+@media only screen and (min-width: 800px)
 {
 	html
 	{
@@ -133,20 +133,20 @@ html
 }
 
 /*----------------------------------------------------- Navigation Links -----------------------------------------------*/
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 800px)
 {
 	.navbar li
 	{
 		display: inline-block;
 
-	    width: 25vw;
+	    width: 18.75vw;
 	    margin: 0 1vw;
 
 		font-size: 1em;
 	}
 }
 
-@media only screen and (min-width: 600px)
+@media only screen and (min-width: 800px)
 {
 	.navbar li
 	{
@@ -198,7 +198,7 @@ html
 }
 
 /*----------------------------------------------------- Information ----------------------------------------------------*/
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 800px)
 {
 	.information
 	{
@@ -214,7 +214,7 @@ html
 	}
 }
 
-@media only screen and (min-width: 600px)
+@media only screen and (min-width: 800px)
 {
 	.information
 	{
@@ -241,18 +241,23 @@ html
 	text-align: left;
 }
 
-.content p
-{
-	font-size: 1em;
-	font-family: 'Nunito';
-}
-
 #title h1 /* h1 is the page title */
 {
 	font-size: 2.5em;
 	font-family: 'Architects Daughter', sans-serif;
 }
 
+#title a
+{
+	color: var(--txt-orange);
+	text-decoration: none;
+}
+
+.content p
+{
+	font-size: 1em;
+	font-family: 'Nunito';
+}
 
 .content h2 /* h2 is page description */
 {
@@ -297,11 +302,116 @@ html
 	text-decoration: none;
 }
 
+.content ul
+{
+	padding-left: 1em;
+
+	font-size: 1em;
+	font-family: 'Nunito', sans-serif;
+
+	list-style-type: circle;
+	list-style-position: inside;
+}
+
 .content img
 {
 	display: block;
 
-    max-width: 80%;
-	max-height: 80%;
+    max-width: 80vmin;
+	max-height: 80vmin;
 	margin: auto;
+
+	border-radius: 10px;
+}
+
+.content .img-info
+{
+	font-size: 0.9em;
+	font-family: 'Nunito', sans-serif;
+	font-style: italic;
+	text-align: center;
+}
+
+.content .video-container
+{
+	width: 80vw;
+	max-width: 640px;
+	margin: 0px auto;
+}
+
+.content .video-container > div
+{
+	position: relative;
+	padding-bottom: 75%;
+	height: 0px;
+}
+
+.content .video-container iframe
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.content .video-info
+{
+	font-size: 0.9em;
+	font-family: 'Nunito', sans-serif;
+	font-style: italic;
+	text-align: center;
+}
+
+.content .tooltip /* Tooltip container */
+{
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.content .tooltip .tooltiptext /* Tooltip box, not hovered */
+{
+	visibility: hidden;
+	position: absolute;
+	bottom: 150%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+
+	padding: 5%;
+
+	color: var(--txt-white);
+	background-color: var(--bg-black-light);
+	border-radius: 4px;
+
+	text-align: center;
+
+	z-index: 1;
+	opacity: 0;
+	transition: bottom 0s, opacity 0s;
+}
+
+.content .tooltip .tooltiptext::after /* Tooltip arrow */
+{
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+
+	margin-left: -5px;
+
+	border-style: solid;
+	border-color: var(--bg-black-light) transparent transparent transparent;
+	border-width: 5px;
+
+	opacity: 0.95;
+}
+
+.content .tooltip:hover .tooltiptext /* Tooltip box during hover */
+{
+	visibility: visible;
+	bottom: 100%;
+	
+	opacity: 0.95;
+	transition: bottom 0.2s, opacity 0.2s;
 }
