@@ -55,7 +55,7 @@ html
 {
 	html
 	{
-		font-size: 4vw;
+		font-size: 3.5vw;
 	}
 }
 
@@ -63,7 +63,7 @@ html
 {
 	html
 	{
-		font-size: 24px;
+		font-size: 21px;
 	}
 }
 
@@ -279,14 +279,14 @@ html
 {
 	margin-bottom: 5vh;
 
-	font-size: 1.5em;
+	font-size: 1.8em;
 	font-family: 'Oswald', sans-serif;
 	text-align: center;
 }
 
 .content h3 /* h3 starts a section in content */
 {
-	font-size: 1.5em;
+	font-size: 1.6em;
 	font-family: 'Nunito', sans-serif;
 }
 
@@ -294,7 +294,7 @@ html
 {
 	margin-top: 1em;
 
-	font-size: 1.2em;
+	font-size: 1.3em;
 	font-family: 'Nunito', sans-serif;
 }
 
