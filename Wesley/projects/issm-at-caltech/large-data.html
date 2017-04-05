@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Large Data &ndash;&ndash; Wesley</title>
+
+	<!-- Grab Fonts from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald:300|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+
+	<!-- Apply Custom CSS -->
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: landscape)" href="../../custom-CSS/style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: portrait)" href="../../custom-CSS/mobile-style.css">
+
+	<!-- Apply Custom JS -->
+	<script src="../../custom-JS/jquery-3.2.0.min.js"></script>
+	<script src="../../custom-JS/navigation.js"></script>
+	<script src="../../custom-JS/onscroll.js"></script>
+
+	<!-- Apply Syntax Highlighter -->
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../syntaxhighlighter/styles/shCoreEclipse.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+
+	<div class="signature">
+		<a href="../../home.html"><img src="../../Wasoon Logo Small.png"></a>
+	</div>
+
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title"><a href="../issm-at-caltech.html">ISSM at Caltech</a></div>
+
+		<a href="javascript:void(0);" class="hamburger-icon" onclick="HamburgerButtonToggle()">&#9776;</a>
+		<li><a href="../../home.html">I am...</a></li>
+		<li><a href="../../projects.html">Projects</a></li>
+		<li><a href="../../topics.html">Topics</a></div></li>
+		<li><a href="../../about.html">About</a></div></li>
+	</ul>
+
+
+	<div class="information">
+
+		<div id="title">
+			<h1><a href="../issm-at-caltech.html">&larr; ISSM at Caltech</a></h1>
+		</div>
+
+
+		<div class="content">
+			<h2>Large Data</h2>
+			<h4>Introduction</h4>
+			<p>The program I am making allows the user to visualize a data set as a triangulation using a <b>Python</b> library called <a href="http://matplotlib.org/" target="_blank"><b>Matplotlib</b></a>. My job is to allow the user to highlight elements in this visualization and record the highlighted triangles with mouse clicks. The maestro (my boss) mentioned that each recorded node for this triangulation is roughly 1 mile away from the nearest node. A land mass like Antarctica would hold about <b>5.4 million nodes</b>. This is the size of data we're dealing with.</p>
+
+			<br>
+
+			<img src="element-numbering.png">
+			<div class="img-info">
+				My program running on 300 nodes
+			</div>
+
+			<br>
+
+			<h4>The problem</h4>
+
+			<p>First, we need to find out whether a click was inside a triangle. I used the <a href="http://blackpawn.com/texts/pointinpoly/" target="_blank">Barycentric technique</a> and created my own function that takes in the three corners of the triangle, a point, and returns a <i>true</i> or <i>false</i> of whether the point is inside the triangle. Problem is, we have a lot of triangles on the screen, and we don't want to perform this check for every last one of them.</p>
+
+			<br>
+
+			<h4>So how do we limit the triangles to check?</h4>
+			<p>Just like with the concept of sorting an array to search it faster, I decided to do a similar thing with my triangles. I could push most of that virtual heavy lifting toward the beginning of the program so it doesn't need to make as much computation during runtime. But in order to sort a triangle, you need to be able to qualify it with one number. We got our triangles as three XY coordinates. That's 6 numbers. So that got me thinking, <i>'What does a triangle have only one of?'</i>. Well, its <b>centroid</b>, of course!</p>
+
+			<br>
+
+			<img src="centroid.png">
+			<div class="img-info">
+				Centroid of a triangle
+			</div>
+
+			<br>
+
+			<p><b>Yes, I know that a triangle's centroid isn't one number.</b></p>
+
+			<p>But it gives me something a little better to work with. I decided to make two lists &ndash;&ndash; one sorted by Centroid X-coordinate and one sorted by Centroid Y-coordinate. Since my mouse click data comes in two variables &ndash;&ndash; X and Y &ndash;&ndash; having these data structures will help me perform the necessary checks. Okay, lets recap. Here are my data structures:</p>
+
+			<br>
+
+			<ul>
+				<li><b>hmap</b> : Hash Map [<b>key</b> = <i>centroid</i> | <b>data</b> = <i>triangle_data</i>] &ndash;&ndash; to get the triangle data</li>
+				<li><b>listX</b> : List [<b>index</b> = <i>centroidX</i> | <b>data</b> = <i>centroid</i>] &ndash;&ndash; to search for centroids with a similar X</li>
+				<li><b>listY</b> : List [<b>index</b> = <i>centroidY</i> | <b>data</b> = <i>centroid</i>] &ndash;&ndash; to search for centroids with a similar Y</li>
+			</ul>
+
+			<br>
+
+			<h4>So how do we use this information?</h4>
+			<p>Here's my algorith:</p>
+			<ul>
+				<li>We start with the click data, which gives us (<b>valueX</b>, <b>valueY</b>)</li>
+				<li>Use <b>valueX</b> and <b>listX</b> to find the triangle closest to my mouse in the X direction. Is your mouse in that triangle?</li>
+				<li>Do the same for Y, is your mouse in that triangle?</li>
+				<li>Do the same for Y, add the closest Y triangle into <b>setY</b>.</li>
+				<li>Now we pan outward performing these checks with <b>valueX-1</b>, <b>valueX+1</b>, <b>valueY-1</b>, and <b>valueY+1</b></li>
+			</ul>
+
+			<br>
+
+			<p>Now I know what you're probably thinking. It sounds like a decent algorithm up until the panning part, where you now have to check outward. Checking outward feels like a worst case <b>O(n)</b> right? Well, it is... but I knew from the background of my task that these data points are almost uniformly distributed. That is to say it <i>could</i> be so bad that we need to check every point, but <i>on average</i>, we'll probably only need to check one or two.</p>
+
+			<br>
+
+			<ul>
+				<li>Worst Case: <b>O(N)</b></li>
+				<li>Best Case: <b>O(log(n))</b></li>
+				<li>Average Case: <b>O(x)</b>, x being lower when triangles are closer to equilateral. Uniform Distribution = <b>O(log(n))</b></li>
+			</ul>
+
+			<br>
+
+
+			<h4>Wrapping up</h4>
+
+			<p>I think that most people don't appreciate the difference a simple change in algorithm makes. We're so spoiled nowadays, with powerful electronic devices, that it doesn't feel useful to spend a little more effort making your code more efficient. But in this particular situation &ndash;&ndash; since it's for research and large data &ndash;&ndash; efficiency was a strict requirement and helped me open my eyes to the impact of algorithms.</p>
+
+			<br>
+
+			<img src="triangles.png">
+			<div class="img-info">
+				Totally unrelated, but here's some triangles inside triangles for you to wrap your head around!
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

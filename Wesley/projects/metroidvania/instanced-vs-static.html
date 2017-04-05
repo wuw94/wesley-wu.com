@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Instanced vs Static &ndash;&ndash; Wesley</title>
+
+	<!-- Grab Fonts from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald:300|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+
+	<!-- Apply Custom CSS -->
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: landscape)" href="../../custom-CSS/style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: portrait)" href="../../custom-CSS/mobile-style.css">
+
+	<!-- Apply Custom JS -->
+	<script src="../../custom-JS/jquery-3.2.0.min.js"></script>
+	<script src="../../custom-JS/navigation.js"></script>
+	<script src="../../custom-JS/onscroll.js"></script>
+
+	<!-- Apply Syntax Highlighter -->
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../syntaxhighlighter/styles/shCoreEclipse.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+
+	<div class="signature">
+		<a href="../../home.html"><img src="../../Wasoon Logo Small.png"></a>
+	</div>
+
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title"><a href="../metroidvania.html">Metroidvania</a></div>
+
+		<a href="javascript:void(0);" class="hamburger-icon" onclick="HamburgerButtonToggle()">&#9776;</a>
+		<li><a href="../../home.html">I am...</a></li>
+		<li><a href="../../projects.html">Projects</a></li>
+		<li><a href="../../topics.html">Topics</a></div></li>
+		<li><a href="../../about.html">About</a></div></li>
+	</ul>
+
+
+	<div class="information">
+
+		<div id="title">
+			<h1><a href="../metroidvania.html">&larr; Metroidvania</a></h1>
+		</div>
+
+
+		<div class="content">
+			<h2>Instanced vs Static</h2>
+
+			<h3>Instanced</h3>
+			<p>To instantiate an object means to create it. That object holds information, and you can ask each object for the information they hold. So pull up a chair &ndash;&ndash; or instantiate one &ndash;&ndash; and lets talk about <b>objects</b>.</p>
+
+			<h4>Why it's important</h4>
+			<p>If we didn't have objects that managed themselves, we would have to manage them from a higher position. We would need to search for those objects, then perform the logic required of them. The extra work put in to do the searching, especially in a frame-by-frame setting such as a game, is too much for a computer to handle.</p>
+
+			<br>
+
+			<p>I made this mistake when I first designed the <a href="time-reversal.html">time reversal</a> for our game. The information was recorded into a giant static array that held information about every object. For some reason at the time, I thought that we should keep all the data together in the same place. Accessing a large array wasn't hindering the computation in any way either; indexing is O(1). But the problems came from times where we needed to <b>create objects</b> &ndash;&ndash; such as projectiles &ndash;&ndash; during recording. The giant array won't know that the new projectile object exists. The first workaround was to create a function that would search for new objects not existing inside the giant array, but that didn't really solve the problem. In hindsight, it was a very poor design by me.</p>
+
+			<br>
+
+			<img src="array-data-structure.png">
+			<div class="img-info">
+				An array
+			</div>
+
+			<br>
+
+			<h4>Enter the power of objects</h4>
+			<p>If two objects are under the same <b>class</b>, they'll be able to store similar data. That's how this problem should be solved, and quite frankly, that problem shouldn't have existed in the first place. I scrapped the giant static array and had each object keep its own array of information. That way, I wouldn't need to do any searching. The problem of adding objects is also solved; the new object will automatically have its own data, which we can manage upon creation.</p>
+
+			<br>
+
+			<br>
+
+			<h3>Static</h3>
+			<p>To a lot of beginning programmers, I've heard people blindly say <i>'never use static'</i>. It's true that <b>static</b> <i>anything</i> has very limited use (since it cant be copied), and that it goes against the concepts of object-oriented programming. But it exists for a reason, and there are a lot of very good applications for it.</p>
+
+			<br>
+
+			<pre class="brush: csharp">
+				protected static int index;</pre>
+
+			<br>
+
+			<p>For our game, we record an object by storing relevant information frame-by-frame into a data structure. When we play it back, we need to read from the structure using an index. It wouldn't make sense for each object to hold an index of the same number. So we make that index variable static so that it's accessible by all objects classified under it.</p>
+
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>

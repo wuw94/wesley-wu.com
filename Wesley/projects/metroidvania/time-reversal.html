@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Time Reversal &ndash;&ndash; Wesley</title>
+
+	<!-- Grab Fonts from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald:300|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+
+	<!-- Apply Custom CSS -->
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: landscape)" href="../../custom-CSS/style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: portrait)" href="../../custom-CSS/mobile-style.css">
+
+	<!-- Apply Custom JS -->
+	<script src="../../custom-JS/jquery-3.2.0.min.js"></script>
+	<script src="../../custom-JS/navigation.js"></script>
+	<script src="../../custom-JS/onscroll.js"></script>
+
+	<!-- Apply Syntax Highlighter -->
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../syntaxhighlighter/styles/shCoreEclipse.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+
+	<div class="signature">
+		<a href="../../home.html"><img src="../../Wasoon Logo Small.png"></a>
+	</div>
+
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title"><a href="../metroidvania.html">Metroidvania</a></div>
+
+		<a href="javascript:void(0);" class="hamburger-icon" onclick="HamburgerButtonToggle()">&#9776;</a>
+		<li><a href="../../home.html">I am...</a></li>
+		<li><a href="../../projects.html">Projects</a></li>
+		<li><a href="../../topics.html">Topics</a></div></li>
+		<li><a href="../../about.html">About</a></div></li>
+	</ul>
+
+
+	<div class="information">
+
+		<div id="title">
+			<h1><a href="../metroidvania.html">&larr; Metroidvania</a></h1>
+		</div>
+
+
+		<div class="content">
+			<h2>Time Reversal</h2>
+
+			<h4>The Theory</h4>
+			<p>Our game has a mechanic where the player is able to stop time, record movements, and go back in time, such that there are two players running around and performing actions. I'll explain in detail how this problem is solved. First, refer to this state diagram which shows how to transition between each game state:</p>
+
+			<br>
+
+			<img src="game-state.png">
+			<div class="img-info">
+				Our game states
+			</div>
+
+			<br>
+
+			<p>And to make sure we're only doing stuff of a particular game state, we only call one of them at a time.</p>
+
+			<pre class="brush: csharp">
+				void FixedUpdate()
+				{
+					switch (operation_mode)
+		            {
+		                case 0:
+		                    NormalUpdate();
+		                    break;
+		                case 1:
+		                    Record();
+		                    break;
+		                case 2:
+		                    Rewind();
+		                    break;
+	                    case 3:
+	                    	Playback();
+	                    	break;
+		            }
+				}</pre>
+
+			<p>By the way, if you're making a game, it's a good idea to know about your game states. It gives you a clearer picture of how your game works</p>
+
+			<br>
+
+
+			<br>
+
+			<h4>How to rewind time</h4>
+			<p>I thought this problem over for a day or two, and came up with 3 basic facts:</p>
+
+			<ul>
+				<li>Since we have to know everything about that time we jump back to, there is no choice but to save information about that time.</li>
+				<li>Information about a certain time is only created and destroyed, so that information should never change once it's made.</li>
+				<li>We have to condense our information of each frame in the smallest form possible, because there will be a lot of it.</li>
+			</ul>
+
+			<br>
+
+			<p>Before we begin, you should know about <a href="https://msdn.microsoft.com/en-us/library/ah19swz4.aspx" target="_blank">structs</a> and <a href="https://msdn.microsoft.com/en-us/library/aa287879(v=vs.71).aspx" target="_blank">arrays</a>.</p>
+
+			<br>
+
+			<h4>The struct</h4>
+			<p>Suppose we wanted to have information about a character at a particular moment. Here's the information we would need:</p>
+
+			<ul>
+				<li>Vector Position</li>
+				<li>Animation State</li>
+				<li>Event State</li>
+			</ul>
+
+			<br>
+
+			<p><b>Vector Position</b></p>
+			<p>We need the object's position so we can reproduce a scenario accurately during playback. We <b>could</b> read the object's velocities and try to interpolate the object's future position, but we decide not to in the fear of running into problems when stuff starts colliding with one another. Physics computation is a precious thing, and if we already computed something, we don't want to compute it again. So because of this, copying the position is enough, and we relinquish the object's physics characteristics during playback.</p>
+
+			<br>
+
+			<p><b>Animation State</b></p>
+			<p>To reproduce a scenario accurately, we'll also need an animation state. Each character has a set of images for animations such as running or attacking. Since the selection of images are stored in arrays, we'll only need to keep track of what index of an animation a particular frame has.</p>
+
+			<br>
+
+			<p><b>Event State</b></p>
+			<p>Now, in our game, the purpose of time travel is to do nifty things like preemptively switching buttons on or off for use during playback. We will need to have an event state for a button to know whether it was on or off at a certain time.</p>
+
+			<br>
+
+			<h4>The array</h4>
+			<p>To store our information, we use an array, since it guarantees that our memory is grouped up for easy access. When we record, we'll continuously put the current frame's data into that array, and we read it when we enter playback. Arrays are pretty handy and allow us to achieve what we want in an efficient manner.</p>
+
+			<br>
+
+			<p>Now, I know that Unity's <b>Update()</b> function isn't called at a constant rate. Sometimes, you'll have more frames per second when your computer can afford it. Sometimes, when your computer is performing heavy computation, you'll have less frames per second. I did a little research and found that Unity actually has another update function called <b>FixedUpdate()</b>, which is called at a constant rate at all times. Since we want our recorded data to have consistent timing, we choose to use <b>FixedUpdate()</b>.</p>
+
+			<br>
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>

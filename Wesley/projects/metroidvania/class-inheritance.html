@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Class Inheritance &ndash;&ndash; Wesley</title>
+
+	<!-- Grab Fonts from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald:300|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+
+	<!-- Apply Custom CSS -->
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: landscape)" href="../../custom-CSS/style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: portrait)" href="../../custom-CSS/mobile-style.css">
+
+	<!-- Apply Custom JS -->
+	<script src="../../custom-JS/jquery-3.2.0.min.js"></script>
+	<script src="../../custom-JS/navigation.js"></script>
+	<script src="../../custom-JS/onscroll.js"></script>
+
+	<!-- Apply Syntax Highlighter -->
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../syntaxhighlighter/styles/shCoreEclipse.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+
+	<div class="signature">
+		<a href="../../home.html"><img src="../../Wasoon Logo Small.png"></a>
+	</div>
+
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title"><a href="../metroidvania.html">Metroidvania</a></div>
+
+		<a href="javascript:void(0);" class="hamburger-icon" onclick="HamburgerButtonToggle()">&#9776;</a>
+		<li><a href="../../home.html">I am...</a></li>
+		<li><a href="../../projects.html">Projects</a></li>
+		<li><a href="../../topics.html">Topics</a></div></li>
+		<li><a href="../../about.html">About</a></div></li>
+	</ul>
+
+
+	<div class="information">
+
+		<div id="title">
+			<h1><a href="../metroidvania.html">&larr; Metroidvania</a></h1>
+		</div>
+
+
+		<div class="content">
+			<h2>Class Inheritance</h2>
+
+			<p>Unity does a fine job of making scripting easy for the player. You throw in a class, write its functionality, and send them off on their merry way in the game world. While this might work in the beginning, we'll end up with a lot of problems in the long run. It's worth taking the extra time to make a hierarchal model in the beginning, even if it takes a substantial amount of planning to do so.</p>
+
+			<h4>Why it's important</h4>
+			<p>Suppose that in our game, we have two different types of enemies: <i>'Blob1'</i> and <i>'Blob2'</i>. Both enemies are capable of similar things &ndash;&ndash; like <b>moving</b> or <b>jumping</b>. Now, it'd be a shame if we had to write those functionalities twice in code, right? Moreover, every time we want to edit the functionality, we would have to do it twice. And if we had three, four, or five enemy types, we'd have to change just as many codes.</p>
+
+			<br>
+
+			<p>So that's why we have class inheritance. We can write the functionality of moving and jumping in a class, and have all of the enemies inherit from that class. That way, when we change the functionality for moving or jumping, we only have to alter code in the parent class.</p>
+
+			<br>
+
+			<img src="class-inheritance.png">
+			<div class="img-info">
+				The hierarchy for our game
+			</div>
+
+			<br>
+
+			<p>By establishing a hierarchy for our game first, we'll have a sort of outline to work with. If we didn't do this kind of designing from the get-go, we would likely run into trouble when we decide to change something.</p>
+
+			<br>
+
+			<h4>How it works</h4>
+			<p>We start off with a class. We'll call it mobile, since these will be the objects that can move.</p>
+
+			<pre class="brush: csharp">
+				public class Mobile
+				{
+					public Mobile()
+					{
+
+					}
+
+					public void Move()
+					{
+						// Do movement
+					}
+				}</pre>
+
+			<br>
+
+			<p>Now we'll add our enemy class. Notice that it's inheriting from Mobile, so it will be able to call any non-private functions inside Mobile.</p>
+
+			<pre class="brush: csharp">
+				public class Blob1 : Mobile
+				{
+					public Blob1()
+					{
+						Move(); // We can call Move() as if it existed in this class!
+					}
+				}</pre>
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>
