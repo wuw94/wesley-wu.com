@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multiplayer Networking &ndash;&ndash; Wesley</title>
+
+	<!-- Grab Fonts from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald:300|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+
+	<!-- Apply Custom CSS -->
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: landscape)" href="../../custom-CSS/style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: portrait)" href="../../custom-CSS/mobile-style.css">
+
+	<!-- Apply Custom JS -->
+	<script src="../../custom-JS/jquery-3.2.0.min.js"></script>
+	<script src="../../custom-JS/navigation.js"></script>
+	<script src="../../custom-JS/onscroll.js"></script>
+
+	<!-- Apply Syntax Highlighter -->
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../syntaxhighlighter/styles/shCoreEclipse.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+
+	<div class="signature">
+		<a href="../../index.html"><img src="../../Wasoon Logo Small.png"></a>
+	</div>
+
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title"><a href="../pon.html">pon</a></div>
+
+		<a href="javascript:void(0);" class="hamburger-icon" onclick="HamburgerButtonToggle()">&#9776;</a>
+		<li><a href="../../index.html">I am...</a></li>
+		<li><a href="../../projects.html">Projects</a></li>
+		<li><a href="../../topics.html">Topics</a></div></li>
+		<li><a href="../../about.html">About</a></div></li>
+	</ul>
+
+
+	<div class="information">
+
+		<div id="title">
+			<h1><a href="../pon.html">&larr; pon</a></h1>
+		</div>
+
+
+		<div class="content">
+			<h2>Multiplayer Networking</h2>
+
+			<p><i>pon</i> is made using a <b>client-server</b> model, in which each client has a representation of what's happening on the server, while the server has the final say in what happens in the game. There's some tweaks that we do though, that make the game appear to run so smoothly. They are listed below.</p>
+
+			<br>
+
+			<img src="client-server-model.png">
+			<div class="img-info">
+				Client-Server Model
+			</div>
+
+			<br>
+
+			<h4>Physics Interpolation</h4>
+
+			<p>We need to update object positions and refresh the screens about 60 times every second. That's a pretty easy task for your graphics card, as that is what it was designed to do. But there's a problem when we need to sync those object positions over the network. Typical networks are not designed to handle that kind of data transmission rate. So we compromise by sending network data at a lower rate &ndash;&ndash; 20 times per second. But wouldn't that mean we're missing important information two-thirds of the time?</p>
+
+			<br>
+
+			<p>This is where <b>physics interpolation</b> comes in. We make up for the missing information through prediction. If we know that an object is moving at a certain velocity, we probably know where it would end up in the next frame. When we receive information about where the object actually ended up, we can then correct ourselves on the local machine and repeat the prediction. As a result, each player gets the best estimate of where the enemy is - with smooth movement - while reducing the impact on <span class="tooltip">bandwidth<span class="tooltiptext">Amount of data travelling in a network during a specified time frame</span></span>.</p>
+
+			<br>
+
+			<h4>Client-Side Prediction</h4>
+
+			<p>Do your inputs for an online game ever feel delayed? That's probably due to the time it takes for your input to reach the server and come back to you. The typical latency between a game-server and your machine can be anywhere between 20ms and 100ms. In the older test builds with <i>pon</i>, you'd experience that delay whenever you fire your weapon or execute a skill. This is because the action is sent to the server first, to identify the new state of the server (such as whether your projectile hit and stuff like that), before sending the action back to yourself for view.</p>
+
+			<br>
+
+			<p>In <b>client-side prediction</b> we calculate that stuff locally and only send the results to the server. There's a bit of extra code, as the client now runs an isolated version of the game whenever there's user input. But the benefits are that we can show the user instant results from their input. It makes them feel like there's no delay even when there is.</p>
+
+			<br>
+
+			<h4>Lag Compensation</h4>
+
+			<p>When you fire at an enemy, you're actually firing at its past location. This is because some time has passed between events on the server, and those events reaching you. So when we send firing info to the server, we can additionally send a timestamp of when the fire occurred. On the server, we look into a history - a circular buffer of transforms - of where each object was given a delay. That way, when you fire at an enemy, you're checking against the server for a past location, and that's how your shot is authenticated.</p>
+
+			<br>
+
+			<p>Compensation for <i>pon</i> is dealt with differently, though. If you landed a shot on your screen, we don't argue; you landed that shot fair and square. So the client actually computes the damage and sends it over to the server. Most contemporary shooters don't do this though, because of how easy it is for a hacker cheat by sending fraudulent messages of <i>'I landed this shot'</i>.</p>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
