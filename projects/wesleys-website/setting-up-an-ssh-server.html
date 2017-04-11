@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Setting Up an SSH Server &ndash;&ndash; Wesley Wu</title>
+
+	<!-- Grab Fonts from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald:300|Permanent+Marker|Nunito" rel="stylesheet" type="text/css">
+
+	<!-- Apply Custom CSS -->
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: landscape)" href="../../custom-CSS/style.css">
+	<link rel="stylesheet" type="text/css" media="only screen and (orientation: portrait)" href="../../custom-CSS/mobile-style.css">
+
+	<!-- Apply Custom JS -->
+	<script src="../../custom-JS/jquery-3.2.0.min.js"></script>
+	<script src="../../custom-JS/navigation.js"></script>
+	<script src="../../custom-JS/onscroll.js"></script>
+
+	<!-- Apply Syntax Highlighter -->
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../syntaxhighlighter/scripts/shBrushPlain.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../syntaxhighlighter/styles/shCoreEclipse.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+
+	<div class="signature">
+		<a href="../../index"><img src="../../Wasoon Logo Small.png"></a>
+	</div>
+
+	<ul class="navbar" id="navbar-id">
+		<div class="navbar-title"><a href="../wesleys-website">Wesley's Website</a></div>
+
+		<a href="javascript:void(0);" class="hamburger-icon" onclick="HamburgerButtonToggle()">&#9776;</a>
+		<li><a href="../../index">I am...</a></li>
+		<li><a href="../../projects">Projects</a></li>
+		<li><a href="../../topics">Topics</a></div></li>
+		<li><a href="../../about">About</a></div></li>
+	</ul>
+
+
+	<div class="information">
+
+		<div id="title">
+			<h1><a href="../wesleys-website">&larr; Wesley's Website</a></h1>
+		</div>
+
+
+		<div class="content">
+			<h2>Setting Up an SSH Server</h2>
+
+			<h4>Cleaning out the computer</h4>
+			<p>The case my brother used was a modified Lian Li. It's a pretty small case considering the amount of technology stuffed in there, and he went all out, man. All the hardware was jam-packed in there, with little budging room. Since the computer was now in my hands, I decided I didn't want this kind of tightness. I looked online for a mid-sized case and settled with a Corsair-Carbide. I like the extra breathing room to keep my hardware nice and cool.</p>
+
+			<br>
+
+			<img src="lian-li-case.png">
+			<div class="img-info">
+				Lian Li PC-V351B
+			</div>
+
+			<br>
+
+			<p>Taking the hardware out was a problem. For the Lian Li case, the entire case center is designed to slide out for an easy assembly. But the modifications, as well as packing an over-the-top graphics card made this task undoubtedly hard. I ended up dismantling the entire thing. I guess the main takeaway for me was that you shouldn't try to make your computer as small as possible. Sure it's portable, but you'll end up making eventual hardware adjustments extraordinarily difficult.</p>
+
+			<br>
+
+			<p>Oh, and there was also another thing that made this whole dismantling process difficult. For the longest time, I couldn't figure out how to take out the CPU fan. For those of you who don't know, a CPU fan is attached to the motherboard via 4 pop-in pins. But for this fan, it was different. I looked all over the place to see if other people had the same problem, but no dice. I figured the pins were faulty and I would forcibly yank them off and replace them later. When I had a reunion with my brother, I asked him about it, and his response made me facepalm super hard.</p>
+
+			<br>
+
+			<h3 align="center">It was superglued.</h3>
+			<p align="center"><i>I'm so done, dude</i></p>
+
+			<br>
+
+			<p>Anyway, I put it all together, crossed my fingers, and it worked!</p>
+
+			<br>
+
+			<h4>Wiping the memory</h4>
+			<p>This isn't the first spare computer that flew my way, and so I usually have a routine I like to do before working with the computer. The first thing is to wipe down the memory. That's more than just removing the operating system, mind you. I have a CD that sets an entire hard-drive to 0's. That's literally the cleanest wipedown you can possibly do. I do this because you never know what sorts of things happened on a computer, or if there might be some virus lingering around. By wiping the memory clean, it would be as if the computer were entirely new. This process took about 24 hours.</p>
+
+			<br>
+
+			<p>The next thing I like to do is install a Linux distribution. I choose Linux because it's versatile and its free. It also opens up my options for the computer, since I'm using Windows. It's nice to have both operating systems available at hand.</p>
+
+			<br>
+
+			<h4>Setting up an SSH server</h4>
+			<p>Okay, this is the part where it was my first time doing such a thing. I Googled everything I didn't know, and to be honest, the forums I visited were a lot more serviceable than I expected. Turns out that <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Configuring" target="_blank">setting up an SSH server</a> isn't too difficult. You can access configuration files to adjust the server to your needs. Navigating with the terminal was a new difficulty for me, though. Sometimes I had to write down where all the configuration files were a lot of the time so I wouldn't get lost.</p>
+
+			<br>
+
+			<h4>Managing my server privacy</h4>
+			<p>Opening up your server to the public is a really scary thing. If you set up your server with password authentication, people can try to brute force their way into your server. And they actually do. Here, check it out!</p>
+
+			<br>
+
+			<img src="log-attempts.png">
+			<div class="img-info">
+				Log attempts
+			</div>
+
+			<br>
+
+			<p>What you're seeing here is a user continuously trying different passwords to get into my server. I originally thought that just password authentication was enough, but after seeing this, I decided I'm not going to risk it.</p>
+
+			<br>
+
+			<p>I could also opt for a <b>key-based authentication</b>. Here's an analogy of how it works. Your computer has a key, and you create a lock that only your key can open. You put that lock onto the server through whatever means you like. When you connect to the server, the server sees your key and checks through every lock to see if it fits. The benefits of using <b>key-based authentication</b> is that we can disable passwords. In other words, only a select few computers can access the server. But this is also a con, since we'll need to make a new key for every computer that wants to connect. And since I'd like to access my server on the go, I don't see this as an option.</p>
+
+			<br>
+
+			<p>I ended up keeping password authentication, but I also use <a href="https://www.liberiangeek.net/2014/10/install-denyhosts-ubuntu-14-04-server/" target="_blank">DenyHosts</a> on top of it to prevent people from brute forcing their way into my server. It's a far cry from key-based authentication, but it works for what I'm trying to accomplish.</p>
+
+			<br>
+
+			<h4>Setting up the webserver</h4>
+			<p>Now that I got my SSH server all set up, its time to set up a webserver to service my website. I use the <b>Apache Web Server</b>, which is <a href="https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps" target="_blank">also pretty easy to set up</a>. Due its similarities with setting up an SSH server, and since I've been playing around the terminal quite some time, I was able to set up my webserver with very little hiccups.</p>
+
+			<br>
+
+			<h4>Closing thoughts</h4>
+			<p>Setting up a server is pretty useful if you think about it. If you need some extra processing power, that's the way to go. If you need space to store files, that's the way to go. After setting up this server, I now know a little more about how much I don't know about computers. So basically, it's only the beginning. But hey, it's something, right?</p>
+
+			<br>
+
+			<img src="its-something.png">
+
+		</div>
+
+	</div>
+
+</body>
+</html>
