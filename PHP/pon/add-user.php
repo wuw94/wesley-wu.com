@@ -20,7 +20,7 @@
 	$email = $mysqli->real_escape_string($_GET['email']);
 	$hash = $_GET['hash'];
  
-	$secretKey="mySecretKey"; # Change this value to match the value stored in the client javascript below
+	$secretKey="mySecretKey";
 
 	$real_hash = md5($name . $password . $email . $secretKey);
 
@@ -29,11 +29,13 @@
 	if($real_hash == $hash)
 	{
 		echo "Hashes match. Performing query...\n";
-		$result = mysqli_query($mysqli, "INSERT INTO user VALUES (1, '$name', '$password', '$email');");
+
+		$result = mysqli_query($mysqli, "INSERT INTO user VALUES ('$name', '$password', '$email');");
 		echo "Query completed. But was it a success?\n";
         }
 	else
 	{
 		echo "Hashes didnt match. Aborting query\n";
 	}
+	$mysqli->close();
 ?>
