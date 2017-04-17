@@ -7,16 +7,16 @@
 
 	$name = $mysqli->real_escape_string($_GET['name']);
 	$password = $mysqli->real_escape_string($_GET['password']);
-	$email = $mysqli->real_escape_string($_GET['email']);
 	$hash = $_GET['hash'];
  
 	$secretKey="485AD1953719843C46CE785ECBF74";
 
-	$real_hash = md5($name . $password . $email . $secretKey);
+	$real_hash = md5($name . $password . $secretKey);
 
 	if ($real_hash == $hash)
 	{
-		$result = mysqli_query($mysqli, "INSERT INTO user VALUES ('$name', '$password', '$email');");
+		$result = mysqli_query($mysqli, "SELECT COUNT(name) FROM user WHERE name='$name' AND password='$password';");
+		echo mysqli_fetch_row($result)[0];
 	}
 	$mysqli->close();
 ?>

@@ -5,29 +5,17 @@
 
 	$mysqli = new mysqli("localhost", "pon-user", "7vsv76olpca", "pon");
 
-	if (mysqli_connect_errno())
-	{
-		printf("Connect failed: %s\n", mysqli_connect_error());
-		exit();
-	}
-
-
-	// Strings must be escaped to prevent SQL injection attack. 
 	$name = $mysqli->real_escape_string($_GET['name']);
-	//$hash = $_GET['hash'];
+	$hash = $_GET['hash'];
  
-	$secretKey="mySecretKey"; # Change this value to match the value stored in the client javascript below
+	$secretKey="485AD1953719843C46CE785ECBF74";
 
 	$real_hash = md5($name . $secretKey);
 
-
-	//if($real_hash == $hash)
-	if (true)
+	if ($real_hash == $hash)
 	{
 		$result = mysqli_query($mysqli, "SELECT COUNT(name) FROM user WHERE name='$name';");
 		echo mysqli_fetch_row($result)[0];
-        }
-	else
-	{
 	}
+	$mysqli->close();
 ?>
