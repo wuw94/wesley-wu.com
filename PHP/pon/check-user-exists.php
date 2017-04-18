@@ -14,7 +14,7 @@
 
 	if ($real_hash == $hash)
 	{
-		$result = mysqli_query($mysqli, "SELECT COUNT(name) FROM user WHERE name='$name';");
+		$result = mysqli_query($mysqli, "SELECT COUNT(name) FROM account WHERE name='$name';");
 		echo mysqli_fetch_row($result)[0];
 	}
 	$mysqli->close();

@@ -16,7 +16,7 @@
 
 	if ($real_hash == $hash)
 	{
-		$result = mysqli_query($mysqli, "INSERT INTO user VALUES ('$name', '$password', '$email');");
+		$result = mysqli_query($mysqli, "INSERT INTO account VALUES ('$name', '$password', '$email');");
 	}
 	$mysqli->close();
 ?>

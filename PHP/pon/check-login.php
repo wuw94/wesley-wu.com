@@ -15,7 +15,7 @@
 
 	if ($real_hash == $hash)
 	{
-		$result = mysqli_query($mysqli, "SELECT name FROM user WHERE name='$name' AND password='$password';");
+		$result = mysqli_query($mysqli, "SELECT name FROM account WHERE name='$name' AND password='$password';");
 		echo mysqli_fetch_row($result)[0];
 	}
 	$mysqli->close();
