@@ -15,7 +15,8 @@
 			$current_row = $result->fetch_assoc();
 			$num_columns = count(array_keys($current_row));
 			for ($current_column = 0; $current_column < $num_columns; $current_column++)
-				$to_return .= ($current_column == 0 ? "" : " ") . array_keys($current_row)[$current_column] . "=" . $current_row[array_keys($current_row)[$current_column]] . "\n";
+				$to_return .= ($current_column == 0 ? "" : " ") . array_keys($current_row)[$current_column] . "=" . $current_row[array_keys($current_row)[$current_column]];
+			$to_return .= "\n";
 		}
 
 		return $to_return;
