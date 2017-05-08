@@ -22,4 +22,5 @@
 			$args[] = $data[$key];
 		call($args);
 	}
+	exit();
 ?>
