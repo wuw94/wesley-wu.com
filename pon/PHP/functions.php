@@ -79,6 +79,16 @@
 
 
 
+			// Matches
+			case "MatchList()":
+				echo query("SELECT * from matches;");
+				break;
+			case "MatchAdd(6)":
+				echo query("INSERT INTO matches (name, externalIP, internalIP, externalIPv6, internalIPv6, guid) VALUES ('$args[1]', '$args[2]', '$args[3]', '$args[4]', '$args[5]', '$args[6]');");
+				break;
+			case "MatchRemove(name)":
+				echo query("DELETE FROM matches WHERE name='$args[1]';");
+
 
 
 
